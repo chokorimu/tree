@@ -22,11 +22,14 @@ void allocate(struct node** root, int value) {
     }
     struct node* cursor = *root;
     while(!cursor->isLeaf || cursor->right == NULL) {
-        if(cursor)
-        cursor->right = newNode;
-        return;
+        if(value < cursor->value) {
+
+        }
     }
+    if(cursor->)
     cursor->left = newNode;
+    cursor->isLeaf = false;
+    cursor->right = newNode;
 }
 
 int main() {
