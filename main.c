@@ -181,10 +181,9 @@ int main() {
     // Contoh Input yang bikin Tree harus muter-muter (Self Balancing)
     root = insert(root, 10);
     root = insert(root, 20);
-    root = insert(root, 30); // Otomatis rotasi karena miring kanan (RR)
+    root = insert(root, 30); 
     root = insert(root, 40);
     root = insert(root, 50);
-    root = insert(root, 25); // Masuk ke tengah, memicu rotasi kompleks
 
     printf("Tampilan AVL (In-order traversal):\n");
     inOrder(root);
