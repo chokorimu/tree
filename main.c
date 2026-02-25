@@ -28,15 +28,13 @@ void insertNode(struct node** root, int newValue) {
             if(cursor->left == NULL) { 
                 cursor->left = newNode;      
                 return;
-            }
-            cursor=cursor->left;
+            } cursor=cursor->left;
         }
         else if(newValue > cursor->value) {
             if(cursor->right == NULL) { 
                 cursor->right = newNode;
                 return;      
-            }
-            cursor=cursor->right;
+            } cursor=cursor->right;
         }
     }
 }
