@@ -4,15 +4,13 @@
 
 struct node {
     int value;
-    bool isLeaf;
     struct node* left;
     struct node* right;
 };
 
-void allocate(struct node** root, int value) {
-    struct node* newNode = malloc(sizeof(*root));
-    newNode->value = value;
-    newNode->isLeaf = true;
+void insertNode(struct node** root, int newValue) {
+    struct node* newNode = malloc(sizeof(*newNode));
+    newNode->value = newValue;
     newNode->left = NULL;
     newNode->right = NULL;
 
@@ -21,19 +19,32 @@ void allocate(struct node** root, int value) {
         return;
     }
     struct node* cursor = *root;
-    while(!cursor->isLeaf || cursor->right == NULL) {
-        if(value < cursor->value) {
-
+    while(true) {
+        if(newValue == cursor->value) {
+            free(newNode);
+            return;
+        }
+        if(newValue < cursor->value) {
+            if(cursor->left == NULL) { 
+                cursor->left = newNode;      
+                return;
+            }
+            cursor=cursor->left;
+        }
+        else if(newValue > cursor->value) {
+            if(cursor->right == NULL) { 
+                cursor->right = newNode;
+                return;      
+            }
+            cursor=cursor->right;
         }
     }
-    if(cursor->)
-    cursor->left = newNode;
-    cursor->isLeaf = false;
-    cursor->right = newNode;
 }
 
 int main() {
     struct node* root = NULL;
-    allocate(&root, 5);
+    insertNode(&root, 5);
+    insertNode(&root, 6);
+    insertNode(&root, 6);
     return 0;
 }
