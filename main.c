@@ -36,7 +36,7 @@ void insertNode(struct node** root, int newValue) {
     newNode->value = newValue;
     newNode->left = NULL;
     newNode->right = NULL;
-
+    
     *leaf = newNode; 
 }
 
@@ -45,7 +45,21 @@ void deleteNode(struct node** root, int deletedValue) {
     if (*leaf == NULL) {
         return;
     }
-    
+    if ((*leaf)->left == NULL && (*leaf)->right == NULL) {
+        *leaf = NULL;
+        return;
+    }
+    if ((*leaf)->left == NULL) {
+        leaf->right = NULL;
+        return;
+    }
+    if ((*leaf)->right == NULL) {
+        (*leaf)->left = NULL;
+        return;
+    }
+    else {
+
+    }
 }
 
 int main() {
