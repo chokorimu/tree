@@ -40,6 +40,14 @@ void insertNode(struct node** root, int newValue) {
     *leaf = newNode; 
 }
 
+void deleteNode(struct node** root, int deletedValue) {
+    struct node** leaf = searchNode(root, deletedValue);
+    if (*leaf == NULL) {
+        return;
+    }
+    
+}
+
 int main() {
     struct node* root = NULL;
     insertNode(&root, 40);
