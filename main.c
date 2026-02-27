@@ -40,36 +40,57 @@ void insertNode(struct node** root, int newValue) {
     *leaf = newNode; 
 }
 
-void deleteNode(struct node** root, int deletedValue) {
-    struct node** leaf = searchNode(root, deletedValue);
-    if (*leaf == NULL) {
+void deleteNode(struct node** root, int value) {
+    struct node** targetLink = searchNode(root, value);
+    if (*targetLink == NULL) {
         return;
     }
-    if ((*leaf)->left == NULL && (*leaf)->right == NULL) {
-        *leaf = NULL;
-        return;
-    }
-    if ((*leaf)->left == NULL) {
-        leaf->right = NULL;
-        return;
-    }
-    if ((*leaf)->right == NULL) {
-        (*leaf)->left = NULL;
-        return;
-    }
+    struct node* nodeToDelete = *targetLink;
+    if (nodeToDelete->left != NULL && nodeToDelete->right != NULL) {
+        struct node* maxLeft = nodeToDelete->left;
+        while (maxLeft->right != NULL) {
+            maxLeft = maxLeft->right;
+        }
+        maxLeft->right = nodeToDelete->right;
+        
+        *targetLink = nodeToDelete->left;
+    } 
     else {
-
+        if (nodeToDelete->left == NULL) {
+            *targetLink = nodeToDelete->right;
+        } else {
+            *targetLink = nodeToDelete->left;
+        }
     }
+    free(nodeToDelete);
+}
+
+void printInOrder(struct node** root) {
+    if ((*root) == NULL) {
+        return;
+    }
+    printInOrder(&((*root)->left));
+    printf("%d, ", (*root)->value);
+    printInOrder(&((*root)->right));
 }
 
 int main() {
     struct node* root = NULL;
+    
     insertNode(&root, 40);
     insertNode(&root, 20);
     insertNode(&root, 10);
     insertNode(&root, 30);
     insertNode(&root, 50);
     insertNode(&root, 60);
-    printf("%d\n", isNumberExist(&root, 50));
+
+    printInOrder(&root);
+    printf("\n%d\n", isNumberExist(&root, 50));
+
+    deleteNode(&root, 50);
+
+    printInOrder(&root);
+    printf("\n%d\n", isNumberExist(&root, 50));
+
     return 0;
 }
